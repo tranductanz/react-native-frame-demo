@@ -9,6 +9,7 @@ export const lightTheme = {
         border: '#e5e7eb',
     },
     spacing: (factor: number) => factor * 8,
+    statusBarStyle: 'dark-content' as const,
 };
 
 export const darkTheme = {
@@ -21,6 +22,7 @@ export const darkTheme = {
         border: '#333333',
     },
     spacing: (factor: number) => factor * 8,
+    statusBarStyle: 'light-content' as const,
 };
 
 export type AppTheme = typeof lightTheme;
