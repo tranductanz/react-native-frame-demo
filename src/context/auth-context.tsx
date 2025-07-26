@@ -11,8 +11,9 @@ type User = {
 type AuthContextType = {
     signUp: (dataInput: any) => void;
     signOut: () => void;
-    signIn: () => void;
-    user?: User | null
+    signIn: (signIn: any) => void;
+    user?: User | null;
+    isLoadingUser?: boolean;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -20,6 +21,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const { setCookie, cookie } = useGlobal();
     const [user, setUser] = React.useState<User | null>(null);
+    const [isLoadingUser, setIsLoadingUser] = React.useState<boolean>(false);
     const signUp = async (dataInput: any) => {
         try {
             console.log(dataInput, 'dataInputddsadasdasataInputdataInput');
@@ -91,6 +93,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
     const getUser = async () => {
         try {
+            setIsLoadingUser(true);
             const result = await axiosRequest({
                 baseURL: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT || '',
                 url: '/account',
@@ -111,15 +114,18 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 return;
             }
             setUser(null);
+
         } catch (error) {
             throw error
+        } finally {
+            setIsLoadingUser(false)
         }
     }
     useEffect(() => {
         getUser();
     }, [])
     return (
-        <AuthContext.Provider value={{ signUp, signOut, signIn, user }}>
+        <AuthContext.Provider value={{ signUp, signOut, signIn, user, isLoadingUser }}>
             {children}
         </AuthContext.Provider >
     )

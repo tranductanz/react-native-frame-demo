@@ -1,6 +1,5 @@
 import { BaseScreen } from '@/src/components/BaseScreen';
 import { useTheme } from '@/src/hooks/useTheme';
-import { axiosRequest } from '@/src/services/axiosRequest';
 
 import React, { useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
@@ -45,19 +44,19 @@ const HomeScreen = () => {
 
     //         console.log(result, 'User____Data');
     //     };
-    const getAllCart = async () => {
-        const result = await axiosRequest({
-            baseURL: 'https://dummyjson.com/carts',
-            url: '/',
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-            },
-        })
-        console.log(result.data, 'resultdataresultdataresultdata');
-    }
+    // const getAllCart = async () => {
+    //     const result = await axiosRequest({
+    //         baseURL: 'https://dummyjson.com/carts',
+    //         url: '/',
+    //         method: 'GET',
+    //         headers: {
+    //             'content-type': 'application/json',
+    //         },
+    //     })
+    //     console.log(result.data, 'resultdataresultdataresultdata');
+    // }
     useEffect(() => {
-        getAllCart();
+        // getAllCart();
         // fetchUser();
     }, [])
 
