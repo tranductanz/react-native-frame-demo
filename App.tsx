@@ -8,22 +8,27 @@ import AuthProvider from './src/context/auth-context';
 import { GlobalProvider } from './src/context/global-context';
 import RootNavigation from './src/navigation';
 import { ThemeProvider } from './src/theme';
+
+import { Provider } from 'react-redux';
+import { store } from './src/store/rootStore';
 enableScreens();
 const App = () => {
     return (
         <SafeAreaProvider>
             <GestureHandlerRootView style={styles.container}>
-                <GlobalProvider>
-                    <ThemeProvider>
-                        <AuthProvider>
-                            <NavigationContainer>
-                                <RootNavigation />
-                            </NavigationContainer>
-                        </AuthProvider>
-                    </ThemeProvider>
-                </GlobalProvider>
+                <Provider store={store}>
+                    <GlobalProvider>
+                        <ThemeProvider>
+                            <AuthProvider>
+                                <NavigationContainer>
+                                    <RootNavigation />
+                                </NavigationContainer>
+                            </AuthProvider>
+                        </ThemeProvider>
+                    </GlobalProvider>
+                </Provider>
             </GestureHandlerRootView>
-        </SafeAreaProvider>
+        </SafeAreaProvider >
     )
 }
 

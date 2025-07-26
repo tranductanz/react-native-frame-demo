@@ -3,62 +3,18 @@ import { useTheme } from '@/src/hooks/useTheme';
 
 import React, { useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import { useHomeViewModel } from './viewmodal/useHomeViewModel';
 
 const HomeScreen = () => {
-    //     const fetchUser = async () => {
-    //         const query = `
-    //    query (
-    //   $options: PageQueryOptions
-    // ) {
-    //   posts(options: $options) {
-    //     data {
-    //       id
-    //       title
-    //     }
-    //     meta {
-    //       totalCount
-    //     }
-    //   }
-    // }`
+    const { loadTodos, todos, loading, error } = useHomeViewModel();
 
-    //         const result = await axiosRequest({
-    //             baseURL: 'https://graphqlzero.almansi.me',
-    //             url: '/api',
-    //             method: 'POST',
-    //             headers: {
-    //                 'content-type': 'application/json',
-    //             },
-    //             data: {
-    //                 query,
-    //                 variables: {
-    //                     options: {
-    //                         paginate: {
-    //                             page: 1,
-    //                             limit: 5,
-    //                         },
-    //                     },
-    //                 },
-    //             },
-
-    //         })
-
-    //         console.log(result, 'User____Data');
-    //     };
-    // const getAllCart = async () => {
-    //     const result = await axiosRequest({
-    //         baseURL: 'https://dummyjson.com/carts',
-    //         url: '/',
-    //         method: 'GET',
-    //         headers: {
-    //             'content-type': 'application/json',
-    //         },
-    //     })
-    //     console.log(result.data, 'resultdataresultdataresultdata');
-    // }
     useEffect(() => {
-        // getAllCart();
-        // fetchUser();
-    }, [])
+        loadTodos();
+    }, []);
+
+    console.log('Todos:', todos);
+    console.log('Loading:', loading);
+    console.log('Error:', error);
 
     const { theme, toggleTheme, mode } = useTheme();
     return (

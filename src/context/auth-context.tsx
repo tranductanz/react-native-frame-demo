@@ -104,7 +104,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     'Cookie': cookie // sử dụng cookie đã lưu
                 }
             })
-            console.log(result, 'resultresultresultresultresult');
             if (result?.data && result.status >= 200 && result.status < 300) {
                 setUser({
                     id: result.data.$id,
