@@ -2,7 +2,8 @@
 import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTheme } from '../theme';
+import { useTheme } from '../hooks/useTheme';
+
 
 export const BaseScreen = ({ children }: { children: React.ReactNode }) => {
     const { theme } = useTheme();

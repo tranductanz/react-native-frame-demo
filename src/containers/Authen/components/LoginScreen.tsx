@@ -1,11 +1,10 @@
 import { BaseScreen } from '@/src/components/BaseScreen';
-import { useNavigation } from '@react-navigation/native';
+import { useLoginViewModel } from '@/src/containers/Authen/viewmodel/useLoginViewModel';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper'; // Assuming you're using react-native-paper for Text component
 const LoginScreen = () => {
-    // Assuming you have a useTheme hook to access the theme
-    const navigation = useNavigation();
+    const { onLoginPress, onNavigateToRegister, } = useLoginViewModel();
     return (
         <BaseScreen>
             <View>
@@ -37,9 +36,7 @@ const LoginScreen = () => {
                     <Button
                         style={{ borderRadius: 6, marginTop: 50, height: 50, justifyContent: 'center', }}
                         mode='contained'
-                        onPress={() => {
-
-                        }}
+                        onPress={onLoginPress}
                     >
                         Login
                     </Button>
@@ -47,7 +44,7 @@ const LoginScreen = () => {
                         <Text style={{ color: '#999999', alignSelf: 'center' }}>
                             {` Don't have an account?`}
                         </Text>
-                        <Button onPress={() => { navigation.navigate('SignUp' as never) }}>Register</Button>
+                        <Button onPress={onNavigateToRegister}>Register</Button>
                     </View>
                 </View>
             </View>

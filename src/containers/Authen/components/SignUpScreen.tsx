@@ -1,11 +1,11 @@
 import { BaseScreen } from '@/src/components/BaseScreen';
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
+import { useLoginViewModel } from '../viewmodel/useLoginViewModel';
 
 const SignUpScreen = () => {
-    const navigation = useNavigation();
+    const { onNavigateToSignIn } = useLoginViewModel();
     return (
         <BaseScreen>
             <View>
@@ -47,7 +47,7 @@ const SignUpScreen = () => {
                         <Text style={{ color: '#999999', alignSelf: 'center' }}>
                             {`Already have an account?`}
                         </Text>
-                        <Button onPress={() => { navigation.navigate('Login' as never) }}>Login</Button>
+                        <Button onPress={onNavigateToSignIn}>Login</Button>
                     </View>
                 </View>
             </View>
