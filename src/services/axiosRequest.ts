@@ -18,7 +18,7 @@ export const axiosRequest = async <T = any>({
     params,
     data,
     headers,
-}: RequestOptions): Promise<T> => {
+}: RequestOptions): Promise<AxiosResponse<T>> => { // ✅ TRẢ VỀ toàn bộ response
     try {
         const response: AxiosResponse<T> = await axiosClient.request({
             baseURL,
@@ -29,9 +29,13 @@ export const axiosRequest = async <T = any>({
             headers,
         });
 
-        return response.data;
+        return response;
     } catch (error: any) {
         console.error(`[API ERROR] ${method} ${url}`, error?.response?.data || error);
-        throw error?.response?.data || error;
+        const message =
+            error?.response?.data?.message ||
+            error?.message ||
+            'Unknown error occurred';
+        throw new Error(message); // ✅ Luôn throw Error chuẩn
     }
 };

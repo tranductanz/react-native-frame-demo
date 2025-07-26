@@ -26,6 +26,17 @@ const MainTab = () => {
           height: 70,
           backgroundColor: theme.colors.card,
           borderTopWidth: 0,
+          position: 'absolute',
+          bottom: 20,
+          marginHorizontal: '5%',
+          borderRadius: 25,
+          elevation: 5, // Android shadow
+          shadowColor: '#333',
+          shadowOffset: { width: 0, height: -3 },
+          shadowOpacity: 0.1,
+          shadowRadius: 3,
+          borderColor: theme.colors.border, // Optional border color
+          borderWidth: 1,
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -36,6 +47,7 @@ const MainTab = () => {
         headerShown: false,
       }}>
       <MainTab.Screen options={{
+        tabBarIconStyle: { marginTop: 5 },
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="home" size={24} color={color} />
         )
@@ -64,6 +76,7 @@ const MainTab = () => {
 
 
       <MainTab.Screen options={{
+        tabBarIconStyle: { marginTop: 5 },
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="account" size={24} color={color} />
         )

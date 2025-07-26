@@ -5,7 +5,9 @@ import { Button, Text, TextInput } from 'react-native-paper';
 import { useLoginViewModel } from '../viewmodel/useLoginViewModel';
 
 const SignUpScreen = () => {
-    const { onNavigateToSignIn } = useLoginViewModel();
+    const { onNavigateToSignIn, onRegisterPress } = useLoginViewModel();
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
     return (
         <BaseScreen>
             <View>
@@ -15,6 +17,7 @@ const SignUpScreen = () => {
                     <View>
                         <Text style={styles.titleTextInput}>Username</Text>
                         <TextInput
+                            onChangeText={setUsername}
                             mode='outlined'
                             style={{
                                 fontSize: 14,
@@ -26,6 +29,7 @@ const SignUpScreen = () => {
                     <View>
                         <Text style={styles.titleTextInput}>Password</Text>
                         <TextInput
+                            onChangeText={setPassword}
                             mode='outlined'
                             style={{
                                 fontSize: 14,
@@ -37,11 +41,9 @@ const SignUpScreen = () => {
                     <Button
                         style={{ borderRadius: 6, marginTop: 50, height: 50, justifyContent: 'center', }}
                         mode='contained'
-                        onPress={() => {
-
-                        }}
+                        onPress={() => onRegisterPress({ username, password })} // Adjusted to match the new onRegisterPress signature
                     >
-                        Login
+                        Register
                     </Button>
                     <View style={{ alignSelf: 'center', justifyContent: 'center', marginTop: 20, flexDirection: 'row' }}>
                         <Text style={{ color: '#999999', alignSelf: 'center' }}>

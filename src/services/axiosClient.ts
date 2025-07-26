@@ -2,11 +2,20 @@
 import axios from 'axios';
 
 const axiosClient = axios.create({
+    withCredentials: true, // 👈 Đây nè
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
+
     },
 });
+
+axiosClient.interceptors.response.use((response) => {
+    const setCookie = response.headers['set-cookie'];
+    console.log(setCookie, '👉 SET-COOKIE');
+    return response;
+});
+
 
 // Request interceptor (handle token)
 axiosClient.interceptors.request.use(
