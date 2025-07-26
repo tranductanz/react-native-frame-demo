@@ -25,4 +25,15 @@ export const darkTheme = {
     statusBarStyle: 'light-content' as const,
 };
 
-export type AppTheme = typeof lightTheme;
+export type AppTheme = {
+    dark: boolean;
+    colors: {
+        background: string;
+        text: string;
+        primary: string;
+        card: string;
+        border: string;
+    };
+    spacing: (factor: number) => number;
+    statusBarStyle: "dark-content" | "light-content";
+};

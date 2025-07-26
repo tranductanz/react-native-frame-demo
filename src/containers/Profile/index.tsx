@@ -1,11 +1,12 @@
+import { BaseScreen } from '@/src/components/BaseScreen'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 
 const ProfileScreen = () => {
     return (
-        <View style={styles.container}>
+        <BaseScreen>
             <Text>ProfileScreen</Text>
-        </View>
+        </BaseScreen>
     )
 }
 
