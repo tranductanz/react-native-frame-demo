@@ -1,5 +1,6 @@
 import { BaseScreen } from '@/src/components/BaseScreen';
-import { useTheme } from '@/src/theme';
+import { useTheme } from '@/src/hooks/useTheme';
+
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
