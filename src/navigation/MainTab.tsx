@@ -33,6 +33,26 @@ const MainTab = () => {
         name="Home"
         component={HomeScreen}
       />
+
+      <MainTab.Screen
+        name="Add"
+        component={() => null}
+        options={{
+          tabBarLabel: () => null,
+          tabBarIcon: () => <Icon name="plus" size={28} color="#fff" />,
+          tabBarButton: (props) => <CustomTabBarButton {...props} />,
+        }}
+        listeners={{
+          tabPress: (e) => {
+            e.preventDefault(); // ngăn chuyển screen
+            console.log('Add button pressed');
+            // mở modal hoặc navigate tùy bạn
+          },
+        }}
+      />
+
+
+
       <MainTab.Screen options={{
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="account" size={24} color={color} />
