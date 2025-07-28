@@ -1,7 +1,8 @@
 
-import { useAppDispatch, useAppSelector } from '@/src/store/rootStore'
-import { fetchTodos } from '../model/api'
-import { selectError, selectLoading, selectTodos } from '../model/homeSelector'
+import { ITodo } from '@/src/containers/Home/model/homeSlice';
+import { useAppDispatch, useAppSelector } from '@/src/store/rootStore';
+import * as homeAPI from '../model/api';
+import { selectError, selectLoading, selectTodos } from '../model/homeSelector';
 
 export const useHomeViewModel = () => {
     const dispatch = useAppDispatch()
@@ -12,7 +13,15 @@ export const useHomeViewModel = () => {
     const isEmptyTodo = todos.length === 0
 
     const loadTodos = () => {
-        dispatch(fetchTodos())
+        dispatch(homeAPI.fetchTodos())
+    }
+
+    const removeTodoItem = (id: number) => {
+        dispatch(homeAPI.removeTodo(id))
+    }
+
+    const createTodoItem = (todo: Omit<ITodo, 'id'>) => {
+        dispatch(homeAPI.createTodo(todo))
     }
 
     return {
@@ -20,6 +29,10 @@ export const useHomeViewModel = () => {
         loading,
         error,
         loadTodos,
-        isEmptyTodo
+        isEmptyTodo,
+        removeTodoItem,
+        createTodoItem
     }
 }
+
+

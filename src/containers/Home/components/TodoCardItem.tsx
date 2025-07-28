@@ -7,17 +7,18 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { RadioButton, Text } from 'react-native-paper';
 
 const TodoCardItem = () => {
-    const HEIGHT_ITEM = 72;
+
     const tabbarHeight = useBottomTabBarHeight();
     const { todos: todoData } = useHomeViewModel();
     return (
         <FlatList
+            showsVerticalScrollIndicator={false}
             data={todoData}
             keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={{ paddingBottom: tabbarHeight + 16 }}
             renderItem={({ item }) => (
                 <SwipeableTodoItem
-                    heightItem={HEIGHT_ITEM}
+                    item={item}
                     onDismiss={() => {
                         console.log('Todo dismissed:', item.id);
                         // TODO: dispatch removeTodo(item.id);

@@ -1,3 +1,4 @@
+import { useHomeViewModel } from '@/src/containers/Home/viewmodal/useHomeViewModel';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
@@ -18,6 +19,7 @@ const CustomTabBarButton = ({ children, onPress }: any) => (
 const MainTab = () => {
   const MainTab = createBottomTabNavigator();
   const { theme } = useTheme();
+  const { createTodoItem } = useHomeViewModel();
   return (
     <MainTab.Navigator
       screenOptions={{
@@ -65,10 +67,17 @@ const MainTab = () => {
           tabBarButton: (props) => <CustomTabBarButton {...props} />,
         }}
         listeners={{
-          tabPress: (e) => {
+          tabPress: async (e) => {
             e.preventDefault(); // ngăn chuyển screen
             console.log('Add button pressed');
             // mở modal hoặc navigate tùy bạn
+            await createTodoItem({
+              title: "Learn React Native 4",
+              body: "321312321312312",
+              completed: false,
+              userId: 1,
+              createdAt: "2025-07-26T16:00:00Z"
+            });
           },
         }}
       />

@@ -1,45 +1,74 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchTodos } from "./api";
+import { handleCreateTodo, handleFetchTodos, handleRemoveTodo } from "@/src/containers/Home/model/homeThunk";
+import { createSlice } from "@reduxjs/toolkit";
 
 
 export interface ITodo {
     id: number;
     title: string;
     completed: boolean;
+    body?: string;
+    userId?: number;
+    createdAt?: string; // ISO date string
+    updatedAt?: string; // ISO date string, optional for updates
 }
 
-const initialState = {
-    todos: [] as ITodo[],
-    loading: false,
-    error: null as string | null
+export interface HomeState {
+    todos: ITodo[];
+    fetchTodos: {
+        loading: boolean;
+        error: string | null;
+    };
+    removeTodo: {
+        loading: boolean;
+        error: string | null;
+    };
+    createTodo: {
+        loading: boolean;
+        error: string | null;
+    };
+    updateTodo: {
+        loading: boolean;
+        error: string | null;
+    };
 }
+
+
+export const initialState: HomeState = {
+    todos: [],
+    fetchTodos: {
+        loading: false,
+        error: null,
+    },
+    removeTodo: {
+        loading: false,
+        error: null,
+    },
+    createTodo: {
+        loading: false,
+        error: null,
+    },
+    updateTodo: {
+        loading: false,
+        error: null,
+    },
+};
 
 const homeSlice = createSlice({
     name: "home",
     initialState,
     reducers: {
-        addTodo: (state, action: PayloadAction<string>) => { },
-        toggleCompleted: (state, action: PayloadAction<number>) => { },
-        removeTodo: (state, action: PayloadAction<number>) => { },
+        // addTodo: (state, action: PayloadAction<string>) => { },
+        // toggleCompleted: (state, action: PayloadAction<number>) => { },
+        // removeTodo: (state, action: PayloadAction<number>) => { },
     },
     extraReducers: (builder) => {
-        builder
-            .addCase(fetchTodos.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(fetchTodos.fulfilled, (state, action: PayloadAction<ITodo[]>) => {
-                state.todos = action.payload;
-                state.loading = false;
-            })
-            .addCase(fetchTodos.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message || 'Failed to fetch todos';
-            });
+        handleFetchTodos(builder);
+        handleRemoveTodo(builder);
+        handleCreateTodo(builder);
     },
 }
 
 )
 
-export const { addTodo, toggleCompleted, removeTodo } = homeSlice.actions
+export const { } = homeSlice.actions
 export default homeSlice.reducer
