@@ -12,7 +12,7 @@ export const fetchTodos = createAsyncThunk<ITodo[]>(
             url: '/posts',
             baseURL: 'http://localhost:3001',
             params: {
-                userId: 1,
+                userId: 1, 
             },
         });
         return response.data;
